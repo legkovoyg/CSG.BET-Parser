@@ -6,6 +6,7 @@ import time
 import csv
 import re
 import pandas as pd
+import steammarket as sm
 
 ua = UserAgent()
 options = webdriver.ChromeOptions()
@@ -19,16 +20,16 @@ service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
 # Закроет страницу если не догрузится
-driver.set_page_load_timeout(20)
+driver.set_page_load_timeout(5)
 
 try:
     driver.get(url=url)
     # Пауза работы страницы в селениум
-    time.sleep(15)
+    time.sleep(5)
     # Сохранение страницы
     with open("index_selenium.html", 'w') as file:
         file.write(driver.page_source)
-    time.sleep(2)
+    time.sleep(5)
     # Данные с сохраненной страницы
     with open("index_selenium.html") as file:
         src = file.read()
@@ -57,30 +58,18 @@ try:
             print(f'Стомость в долларах ' + item['data-value'], '$')
             print(f'Количество в наличии ' + item['data-count'])
             print(f'Стоимость в рублях', b, 'рублей')
+            print(item)
             # Запись данных в .csv
             writer = csv.writer(file, delimiter=';')
+            current_price = sm.get_item(730,item['data-tooltip'], currency= "USD")
             writer.writerow([item['data-tooltip'],
-                             format(float(item['data-value']), '10f'),
                              format(float(b), '10f'),
-                             item['data-count']])
+                             item['data-count'],
+                            ("https://steamcommunity.com/market/listings/730/" + item['data-tooltip']),
+                             current_price,
+                            format(float(item['data-value']), '10f')])
 
             count = count+1
-
-
-
-    for item in steam_url:
-        cnt=0
-        with open('Пересчетная таблица.csv', 'a', encoding='utf-8', newline='') as file:
-            writer = csv.writer(file, delimiter=';')
-            text = item['href']
-            text_1=text.replace('#mainContents","","top=250,left=1,width=640,height=900")','')
-            text_2= text_1.replace('javascript:open("','')
-            writer.writerow([text_2],)
-            count = count + 1
-            print(text_2)
-        
-        if count == 2:
-            break
 except Exception as ex:
     print(ex)
 finally:
