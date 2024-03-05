@@ -1,7 +1,7 @@
 import json
-from selenium import webdriver
-import selenium.common.exceptions as exc
-from selenium.webdriver.common.by import By
+from example import webdriver
+import example.common.exceptions as exc
+from example.webdriver.common.by import By
 from selenium_stealth import stealth
 
 

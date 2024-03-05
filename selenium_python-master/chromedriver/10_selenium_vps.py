@@ -1,5 +1,5 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from example import webdriver
+from example.webdriver.common.keys import Keys
 import time
 from auth_data import vk_password, vk_phone
 import pickle

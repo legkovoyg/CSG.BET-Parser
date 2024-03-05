@@ -1,6 +1,6 @@
 import random
 
-from selenium import webdriver
+from example import webdriver
 import time
 from multiprocessing import Pool
 
