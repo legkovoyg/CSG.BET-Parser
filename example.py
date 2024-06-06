@@ -21,10 +21,10 @@ service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 try:
     # Закроет страницу если не догрузится
-    driver.set_page_load_timeout(5)
+    driver.set_page_load_timeout(10)
     driver.get(url=url)
     # Пауза работы страницы в селениум
-    time.sleep(5)
+    time.sleep(10)
     email_input = driver.find_element(By.NAME, 'username')
     email_input.clear()
     email_input.send_keys('legkovoyger@yandex.ru')

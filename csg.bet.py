@@ -15,7 +15,7 @@ options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) Apple
 options.page_load_strategy = 'none'
 
 # Ссылка на сайт
-url = 'https://symbolics.com/about.php'
+url = 'https://csg.bet/'
 service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
